@@ -1,20 +1,9 @@
-# Use Node base image
-FROM node:18
+FROM eclipse-temurin:17-jdk-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+COPY target/*.jar app.jar
 
-# Install dependencies
-RUN npm install
-
-# Copy rest of code
-COPY . .
-
-# Expose port (VERY IMPORTANT)
 EXPOSE 8080
 
-# Start server
-CMD ["npm", "start"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
